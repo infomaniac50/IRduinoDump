@@ -15,6 +15,8 @@ IRrecv irrecv(RECV_PIN);
 
 decode_results results;
 
+
+
 struct IrCode
 {
   int type;
@@ -38,12 +40,12 @@ void setup()
 //void dump(void *v) {
 //  decode_results *results = (decode_results *)v
 void dump(decode_results *results) {
-  memset((void*)&code, 0, sizeof(IrCode));
-
   code.type = results->decode_type;
 
   if (results->decode_type == PANASONIC)
     code.ex1 = results->panasonicAddress;
+
+  code.ex2 = 0;
 
   code.nbits = results->bits;
   code.value = results->value;
@@ -58,6 +60,7 @@ void dump(decode_results *results) {
   Serial.write(',');
   Serial.print((unsigned long int)code.value, HEX);
   Serial.print((unsigned long int)(code.value >> 32), HEX);
+  Serial.write('\n');
 }
 
 void loop() {
