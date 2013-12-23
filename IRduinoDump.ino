@@ -58,8 +58,8 @@ void dump(decode_results *results) {
   Serial.write(',');
   Serial.print(code.ex2, HEX);
   Serial.write(',');
-  Serial.print((unsigned long int)code.value, HEX);
   Serial.print((unsigned long int)(code.value >> 32), HEX);
+  Serial.print((unsigned long int)code.value, HEX);
   Serial.write('\n');
 }
 
